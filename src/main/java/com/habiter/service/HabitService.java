@@ -43,6 +43,17 @@ public class HabitService {
         habitRepository.deleteById(id);
     }
 
+    public HabitResponseDTO update(Long id, HabitRequestDTO request) {
+        Habit habit = habitRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Hábito no encontrado con id: " + id));
+
+        habit.setName(request.name());
+        habit.setDescription(request.description());
+        habit.setFrequency(Habit.Frequency.valueOf(request.frequency()));
+
+        return toResponseDTO(habitRepository.save(habit));
+    }
+
     private HabitResponseDTO toResponseDTO(Habit habit) {
         return new HabitResponseDTO(
                 habit.getId(),

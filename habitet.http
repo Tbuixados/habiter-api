@@ -3,7 +3,7 @@ POST http://localhost:8080/api/habits
 Content-Type: application/json
 
 {
-  "name": "Hacer ejercicio",
+  "name": "",
   "description": "30 minutos de cardio",
   "frequency": "DAILY"
 }
@@ -16,3 +16,13 @@ GET http://localhost:8080/api/habits/999
 
 ### Eliminar hábito
 DELETE http://localhost:8080/api/habits/1
+
+### Actualizar hábito
+PUT http://localhost:8080/api/habits/1
+Content-Type: application/json
+
+{
+  "name": "Hacer ejercicio actualizado",
+  "description": "45 minutos de cardio",
+  "frequency": "WEEKLY"
+}

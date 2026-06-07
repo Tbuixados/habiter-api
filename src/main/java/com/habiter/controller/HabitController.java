@@ -3,6 +3,7 @@ package com.habiter.controller;
 import com.habiter.dto.HabitRequestDTO;
 import com.habiter.dto.HabitResponseDTO;
 import com.habiter.service.HabitService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class HabitController {
     }
 
     @PostMapping
-    public ResponseEntity<HabitResponseDTO> save(@RequestBody HabitRequestDTO request) {
+    public ResponseEntity<HabitResponseDTO> save(@Valid @RequestBody HabitRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(habitService.save(request));
     }
 
@@ -38,5 +39,10 @@ public class HabitController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         habitService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<HabitResponseDTO> update(@PathVariable Long id, @Valid @RequestBody HabitRequestDTO request) {
+        return ResponseEntity.ok(habitService.update(id, request));
     }
 }
