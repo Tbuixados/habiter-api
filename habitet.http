@@ -26,3 +26,15 @@ Content-Type: application/json
   "description": "45 minutos de cardio",
   "frequency": "WEEKLY"
 }
+
+
+### Completar un hábito
+POST http://localhost:8080/api/habits/1/completions
+Content-Type: application/json
+
+{
+  "notes": "Me sentí muy bien hoy"
+}
+
+### Ver completions de un hábito
+GET http://localhost:8080/api/habits/1/completions

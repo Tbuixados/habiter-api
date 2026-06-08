@@ -2,6 +2,8 @@ package com.habiter.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "habits")
@@ -23,6 +25,9 @@ public class Habit {
 
     @Column(nullable = false)
     private boolean active = true;
+
+    @OneToMany(mappedBy = "habit", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HabitCompletion> completions = new ArrayList<>();
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -51,6 +56,9 @@ public class Habit {
 
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public List<HabitCompletion> getCompletions() { return completions; }
+    public void setCompletions(List<HabitCompletion> completions) { this.completions = completions; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
