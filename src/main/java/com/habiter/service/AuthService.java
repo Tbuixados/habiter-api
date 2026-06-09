@@ -3,6 +3,7 @@ package com.habiter.service;
 import com.habiter.dto.AuthResponseDTO;
 import com.habiter.dto.LoginRequestDTO;
 import com.habiter.dto.RegisterRequestDTO;
+import com.habiter.exception.BusinessException;
 import com.habiter.exception.ResourceNotFoundException;
 import com.habiter.model.User;
 import com.habiter.repository.UserRepository;
@@ -31,18 +32,19 @@ public class AuthService {
 
     public AuthResponseDTO register(RegisterRequestDTO request) {
         if (userRepository.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("El email ya está registrado");
+            throw new BusinessException("El email ya está registrado");
         }
 
         User user = new User();
-        user.setName(request.name());
+        user.setFirstName(request.firstName());
+        user.setLastName(request.lastName());
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
 
         userRepository.save(user);
 
         String token = jwtService.generateToken(user);
-        return new AuthResponseDTO(token, user.getName(), user.getEmail());
+        return new AuthResponseDTO(token, user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
     public AuthResponseDTO login(LoginRequestDTO request) {
@@ -54,6 +56,6 @@ public class AuthService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         String token = jwtService.generateToken(user);
-        return new AuthResponseDTO(token, user.getName(), user.getEmail());
+        return new AuthResponseDTO(token, user.getFirstName(), user.getLastName(), user.getEmail());
     }
 }

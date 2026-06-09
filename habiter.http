@@ -81,7 +81,8 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Tomi",
+  "firstName": "Tomi",
+  "lastName": "Buixa",
   "email": "tomi@gmail.com",
   "password": "123456"
 }
@@ -104,3 +105,29 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhd
 ### 3. Listar hábitos — solo los del usuario autenticado
 GET http://localhost:8080/api/habits
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
+
+
+
+
+
+### JSON malformado — debería dar 400
+POST http://localhost:8080/api/habits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
+
+{
+  "name": "Test"
+  "frequency": "DAILY"
+}
+
+###
+
+### Frequency inválida — debería dar 400
+POST http://localhost:8080/api/habits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
+
+{
+  "name": "Test",
+  "frequency": "MENSUAL"
+}
