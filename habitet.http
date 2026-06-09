@@ -38,3 +38,31 @@ Content-Type: application/json
 
 ### Ver completions de un hábito
 GET http://localhost:8080/api/habits/1/completions
+
+
+
+
+### Registrar usuario
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Tomi",
+  "email": "tomi@gmail.com",
+  "password": "123456"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "tomi@gmail.com",
+  "password": "123456"
+}
+
+
+
+### Obtener hábitos con token
+GET http://localhost:8080/api/habits
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2Nzg5NywiZXhwIjoxNzgxMDU0Mjk3fQ.sTGEFmMC8tZleol7314HMtxzTgY5ogvJ1DNOemhmuS_tfNmkgPBX-ZZqQ_zMi-Pa
