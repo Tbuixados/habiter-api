@@ -66,3 +66,41 @@ Content-Type: application/json
 ### Obtener hábitos con token
 GET http://localhost:8080/api/habits
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2Nzg5NywiZXhwIjoxNzgxMDU0Mjk3fQ.sTGEFmMC8tZleol7314HMtxzTgY5ogvJ1DNOemhmuS_tfNmkgPBX-ZZqQ_zMi-Pa
+
+
+
+
+
+
+
+
+
+
+### 1. Registrar usuario
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Tomi",
+  "email": "tomi@gmail.com",
+  "password": "123456"
+}
+
+###
+
+### 2. Crear hábito con el token del registro
+POST http://localhost:8080/api/habits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
+
+{
+  "name": "Hacer ejercicio",
+  "description": "30 minutos de cardio",
+  "frequency": "DAILY"
+}
+
+###
+
+### 3. Listar hábitos — solo los del usuario autenticado
+GET http://localhost:8080/api/habits
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ

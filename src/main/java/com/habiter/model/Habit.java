@@ -26,6 +26,10 @@ public class Habit {
     @Column(nullable = false)
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @OneToMany(mappedBy = "habit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HabitCompletion> completions = new ArrayList<>();
 
@@ -56,6 +60,9 @@ public class Habit {
 
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public List<HabitCompletion> getCompletions() { return completions; }
     public void setCompletions(List<HabitCompletion> completions) { this.completions = completions; }
