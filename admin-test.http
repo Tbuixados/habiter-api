@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Fresh",
+  "lastName": "User",
+  "email": "fresh5@gmail.com",
+  "password": "123456"
+}
+
+### Test admin — reemplazá TOKEN con el token de arriba
+GET http://localhost:8080/api/admin/users/count
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmcmVzaDVAZ21haWwuY29tIiwiaWF0IjoxNzgxMDgxMjQzLCJleHAiOjE3ODExNjc2NDN9.IqbetZB-FxSc16ZJmBGLXO6n_mRs8pa2PKiSxbeEBqSDE93oL6bk78mJz8R3hI_o

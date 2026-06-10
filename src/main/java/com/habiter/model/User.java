@@ -2,6 +2,7 @@ package com.habiter.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String firstName;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.ROLE_USER;
+
     @Column(nullable = false)
     private String lastName;
 
@@ -33,9 +38,8 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
-
     @Override
     public String getUsername() {
         return email;
@@ -82,4 +86,7 @@ public class User implements UserDetails {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 }

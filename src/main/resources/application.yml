@@ -18,9 +18,7 @@ spring:
       hibernate:
         format_sql: true
 
-logging:
-  level:
-    org.springframework.boot.context.config: DEBUG
+
 
 server:
   port: 8080
@@ -28,3 +26,4 @@ server:
 jwt:
   secret: ${JWT_SECRET}
   expiration: ${JWT_EXPIRATION}
+

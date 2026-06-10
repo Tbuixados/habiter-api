@@ -65,9 +65,7 @@ Content-Type: application/json
 
 ### Obtener hábitos con token
 GET http://localhost:8080/api/habits
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2Nzg5NywiZXhwIjoxNzgxMDU0Mjk3fQ.sTGEFmMC8tZleol7314HMtxzTgY5ogvJ1DNOemhmuS_tfNmkgPBX-ZZqQ_zMi-Pa
-
-
+Authorization: Bearer
 
 
 
@@ -92,8 +90,7 @@ Content-Type: application/json
 ### 2. Crear hábito con el token del registro
 POST http://localhost:8080/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
-
+Authorization: Bearer
 {
   "name": "Hacer ejercicio",
   "description": "30 minutos de cardio",
@@ -104,8 +101,7 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhd
 
 ### 3. Listar hábitos — solo los del usuario autenticado
 GET http://localhost:8080/api/habits
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
-
+Authorization: Bearer
 
 
 
@@ -113,8 +109,7 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhd
 ### JSON malformado — debería dar 400
 POST http://localhost:8080/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
-
+Authorization: Bearer
 {
   "name": "Test"
   "frequency": "DAILY"
@@ -125,9 +120,33 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhd
 ### Frequency inválida — debería dar 400
 POST http://localhost:8080/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0b21pQGdtYWlsLmNvbSIsImlhdCI6MTc4MDk2OTYzNSwiZXhwIjoxNzgxMDU2MDM1fQ.ArrydOAEv_ZCNTRZCaLdVNporTKjkp64CDaXEg4q2OR1kbnHSPzJGSFpSqeHEZiQ
-
+Authorization: Bearer
 {
   "name": "Test",
   "frequency": "MENSUAL"
 }
+
+
+
+
+
+
+### Usuario nuevo
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "Admin",
+  "email": "nuevo2@gmail.com",
+  "password": "123456"
+}
+
+###
+GET http://localhost:8080/api/admin/users/count
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJudWV2bzJAZ21haWwuY29tIiwiaWF0IjoxNzgxMDgwMjIxLCJleHAiOjE3ODExNjY2MjF9.HVweD1JH3heNb5WhX4unDRPhNS6Hz8EPcoNuv_PdqxzUBZk66XsqvbTmCiKKqJds
+
+
+### Mismo token, endpoint normal
+GET http://localhost:8080/api/habits
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJudWV2b0BnbWFpbC5jb20iLCJpYXQiOjE3ODEwNzk2MDEsImV4cCI6MTc4MTE2NjAwMX0.TG6Ck0G8IDpV7vfsGQw2QLOdnL7_uHNtRsLge_q2FP9FGnCdesHBjunyVa-LNn-e
